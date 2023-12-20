@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each album in album_list
+      li
+        a(href=album.url) #{album.title}
+        |  - #{album.artist.artist_name}
+
+    else
+      li There are no albums.

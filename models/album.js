@@ -7,12 +7,6 @@ const AlbumSchema = new Schema({
   artist: { type: Schema.Types.ObjectId, ref: "Artist", required: true },
   price: { type: Number, required: true },
   genre: [{ type: Schema.Types.ObjectId, ref: "Genre" }],
-  status: {
-    type: String,
-    required: true,
-    enum: ["In Stock", "Out of Stock", "Backorder"],
-    default: "Out of Stock",
-  },
 });
 
 // Virtual for album's URL

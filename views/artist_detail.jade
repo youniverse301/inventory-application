@@ -1,0 +1,28 @@
+extends layout
+
+block content
+
+  h1 Artist: #{artist.artist_name}
+  if artist.gov_name
+    p Government Name: #{artist.gov_name}
+  if artist.date_of_birth
+    p Date of Birth: #{artist.date_of_birth_formatted}
+  if artist.date_of_death
+    p Date of Death: #{artist.date_of_death_formatted}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Albums
+
+    dl
+      each album in artist_albums
+        dt
+          a(href=album.url) #{album.title}
+          |  $#{album.price}
+
+      else
+        p This author has no albums.
+
+    hr
+    p
+        a(href=artist.url+'/delete') Delete artist

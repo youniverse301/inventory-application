@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+  h1 #{title}: #{artist.name}
+  p= artist.lifespan
+
+  if artist_albums.length
+
+    p #[strong Delete the following albums before attempting to delete this artist.]
+    div(style='margin-left:20px;margin-top:20px')
+      h4 Albums
+      dl
+        each album in artist_albums
+          dt
+            a(href=album.url) #{album.title}
+          dd #{album.price}
+
+  else
+    p Do you really want to delete this Artist?
+
+    form(method='POST')
+      div.form-group
+        input#authorid.form-control(type='hidden', name='authorid', value=artist._id )
+
+      button.btn.btn-primary(type='submit') Delete

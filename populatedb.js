@@ -59,15 +59,13 @@ console.log(
     artists[index] = artist;
   }
   
-  async function albumCreate(index, title, artist, price, genre, status) {
+  async function albumCreate(index, title, artist, price, genre) {
     const albumdetail = {
       title: title,
       artist: artist,
-      price: price,
-      status: status,
+      price: price
     };
     if (genre != false) albumdetail.genre = genre;
-    if (status != false) albumdetail.status = status;
   
     const album = new Album(albumdetail);
     await album.save();
@@ -75,11 +73,13 @@ console.log(
     console.log(`Added album: ${title}`);
   }
   
-  async function albumStockCreate(index, album, numInStock) {
+  async function albumStockCreate(index, album, numInStock, status) {
     const albumstockdetail = {
       album: album,
       numInStock: numInStock,
+      status: status
     };
+    if (status != false) albumstockdetail.status = status;
   
     const albumstock = new AlbumStock(albumstockdetail);
     await albumstock.save();
@@ -116,49 +116,42 @@ console.log(
         artists[0],
         29,
         [genres[2]],
-        "In Stock"
       ),
       albumCreate(1,
         "Icedancer",
-        artists[2],
+        artists[0],
         29,
         [genres[0]],
-        "In Stock"
       ),
       albumCreate(2,
         "333",
-        artists[1],
+        artists[0],
         29,
         [genres[0]],
-        "Out of Stock"
       ),
       albumCreate(3,
         "If You're Reading This It's Too Late",
         artists[1],
         35,
         [genres[2]],
-        "In Stock"
       ),
       albumCreate(4,
         "1999",
         artists[2],
         35,
         [genres[1], genres[0]],
-        "In Stock"
       ),
       albumCreate(5,
         "Post",
         artists[3],
         39,
         [genres[0], genres[1]],
-        "In Stock"
       ),
       albumCreate(6,
         "Aretha Now",
         artists[4],
         20,
         [genres[3]],
-        "Backorder"
       ),
     ]);
   }
@@ -166,12 +159,12 @@ console.log(
   async function createAlbumStocks() {
     console.log("Adding album inventory");
     await Promise.all([
-      albumStockCreate(0, albums[0],  12),
-      albumStockCreate(1, albums[1],  25),
-      albumStockCreate(2, albums[2],  0),
-      albumStockCreate(3, albums[3],  78),
-      albumStockCreate(4, albums[4],  31),
-      albumStockCreate(5, albums[5],  67),
-      albumStockCreate(6, albums[6],  0),
+      albumStockCreate(0, albums[0],  12, "In Stock"),
+      albumStockCreate(1, albums[1],  25, "In Stock"),
+      albumStockCreate(2, albums[2],  0, "Out of Stock"),
+      albumStockCreate(3, albums[3],  78, "In Stock"),
+      albumStockCreate(4, albums[4],  31, "In Stock"),
+      albumStockCreate(5, albums[5],  67, "In Stock"),
+      albumStockCreate(6, albums[6],  0, "Backorder"),
     ]);
   }

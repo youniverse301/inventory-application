@@ -93,13 +93,13 @@ router.get("/genres", genre_controller.genre_list);
 // GET request for creating a AlbumStock. NOTE This must come before route that displays AlbumStock (uses id).
 router.get(
   "/albumstock/create",
-  album_stock_controller.albumstock_create_get,
+  album_stock_controller.albumstock_update_get,
 );
 
 // POST request for creating AlbumStock.
 router.post(
   "/albumstock/create",
-  album_stock_controller.albumstock_create_post,
+  album_stock_controller.albumstock_update_post,
 );
 
 // GET request to delete AlbumStock.
@@ -115,10 +115,7 @@ router.post(
 );
 
 // GET request to update AlbumStock.
-router.get(
-  "/albumstock/:id/update",
-  album_stock_controller.albumstock_update_get,
-);
+router.get("/albumstock/:id/edit", album_stock_controller.albumstock_update_get);
 
 // POST request to update AlbumStock.
 router.post(

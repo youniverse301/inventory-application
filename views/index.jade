@@ -2,4 +2,15 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Welcome to #[em Record Store]
+
+  h1 Dynamic content
+
+  p The store has the following record counts:
+
+  ul
+    li #[strong Albums:] !{album_count}
+    li #[strong Album Inventory:] !{album_stock_count}
+    li #[strong Albums available:] !{album_stock_available_count}
+    li #[strong Artists:] !{artist_count}
+    li #[strong Genres:] !{genre_count}

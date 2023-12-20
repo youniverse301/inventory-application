@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  h1 Title: #{album.title}
+
+  p #[strong Artist: ]
+    a(href=album.artist.url) #{album.artist.artist_name}
+  p #[strong Genre: ]
+    each val, index in album.genre
+      a(href=val.url) #{val.name}
+      if index < album.genre.length - 1
+        |, 
+  p #[strong Price: ]
+     $#{album.price}
+
+  div(style='margin-left:20px;margin-top:20px')
+    h4 Details
+
+    each val in album_stocks
+      hr
+      if val.status=='In Stock'
+        p.text-success #{val.status}
+      else if val.status=='Out of Stock'
+        p.text-danger #{val.status}
+      else
+        p.text-warning #{val.status}
+      p #[strong Quantity: ] #{val.numInStock}
+      if val.status!='Available'
+      p #[strong Id: ]
+        a(href=val.url) #{val._id}
+
+    else
+      p There are no copies of this album in the store.
+
+  hr
+  p
+    a(href=album.url+'/delete') Delete Album
+  p
+    a(href=album.url+'/update') Update Album

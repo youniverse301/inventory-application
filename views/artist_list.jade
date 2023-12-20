@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each artist in artist_list
+      li
+        a(href=artist.url) #{artist.artist_name}
+        if artist.date_of_birth
+          |  (#{artist.date_of_birth_formatted}
+          if artist.date_of_death
+            |  - #{artist.date_of_death_formatted})
+
+    else
+      li There are no artists.

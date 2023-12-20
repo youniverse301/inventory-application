@@ -1,0 +1,23 @@
+extends layout
+
+block content
+
+  h1 Genre: #{genre.name}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Albums
+
+    dl
+      each album in genre_albums
+        dt
+          a(href=album.url) #{album.title}
+          span  - #{album.artist.artist_name}
+
+      else
+        p This genre has no albums
+  hr
+  p
+    a(href=genre.url+'/delete') Delete Genre
+  p
+    a(href=genre.url+'/update') Update Genre

@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1 #{title}: #{album.title}
+
+  - var hasInStock = album_stocks.some(stock => stock.status === 'In Stock');
+  if hasInStock
+    p #[strong Delete the following album stocks before attempting to delete this album.]
+    div(style='margin-left:20px;margin-top:20px')
+      h4 Album Stocks
+
+      dl
+      each stock in album_stocks
+        dt
+          a(href="/catalog/albumstock/create") #{stock.album.title} - 
+            if stock.status === 'In Stock'
+              span.text-success #{stock.status}
+            else
+              span.text-danger #{stock.status}
+        dd Quantity: #{stock.numInStock}
+  else
+    p Do you really want to delete this album?
+    form(method='POST' action='')
+      div.form-group
+        input#albumid.form-control(type='hidden',name='albumid', required='true', value=album._id )
+      button.btn.btn-primary(type='submit') Delete

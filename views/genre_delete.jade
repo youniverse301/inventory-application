@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1 #{title}: #{genre.name}
+
+  if albums.length
+
+    p #[strong Delete the following albums before attempting to delete this genre.]
+
+    div(style='margin-left:20px;margin-top:20px')
+
+      h4 Albums
+
+      dl
+      each album in albums
+        dt
+          a(href=album.url) #{album.title}
+        dd #{album.artist.artist_name}
+
+  else
+    p Do you really want to delete this Genre?
+
+    form(method='POST' action='')
+      div.form-group
+        input#genreid.form-control(type='hidden',name='genreid', required='true', value=genre._id )
+
+      button.btn.btn-primary(type='submit') Delete

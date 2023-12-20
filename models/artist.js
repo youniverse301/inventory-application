@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { DateTime } = require("luxon");
 
 const Schema = mongoose.Schema;
 
@@ -16,5 +17,13 @@ ArtistSchema.virtual("url").get(function () {
   return `/catalog/artist/${this._id}`;
 });
 
+ArtistSchema.virtual("date_of_death_formatted").get(function () {
+    return DateTime.fromJSDate(this.date_of_death).toLocaleString(DateTime.DATE_MED);
+});
+
+ArtistSchema.virtual("date_of_birth_formatted").get(function () {
+    return DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED);
+});
+  
 // Export model
 module.exports = mongoose.model("Artist", ArtistSchema);

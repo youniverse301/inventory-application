@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+
+  if albumstock_list.length > 0
+    ul
+      each val in albumstock_list
+        li
+          if val.album
+            a(href=val.album.url) #{val.album.title}
+            |  - 
+          else
+            | Album Not Available -
+          if val.status == 'In Stock'
+            span.text-success #{val.status} 
+            | - Quantity: #{val.numInStock}
+          else
+            span.text-danger #{val.status}
+  else
+    p No album stocks available.
