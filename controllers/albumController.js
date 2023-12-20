@@ -10,7 +10,6 @@ exports.index = asyncHandler(async (req, res, next) => {
   // Get details of albums, album stocks, artists and genre counts (in parallel)
   const [
     numAlbums,
-    numAlbumStocks,
     numAvailableAlbumStocks,
     numArtists,
     numGenres,
