@@ -16,7 +16,6 @@ exports.index = asyncHandler(async (req, res, next) => {
     numGenres,
   ] = await Promise.all([
     Album.countDocuments({}).exec(),
-    AlbumStock.countDocuments({}).exec(),
     AlbumStock.countDocuments({ status: "In Stock" }).exec(),
     Artist.countDocuments({}).exec(),
     Genre.countDocuments({}).exec(),
@@ -25,7 +24,6 @@ exports.index = asyncHandler(async (req, res, next) => {
   res.render("index", {
     title: "Local Record Store Home",
     album_count: numAlbums,
-    album_stock_count: numAlbumStocks,
     album_stock_available_count: numAvailableAlbumStocks,
     artist_count: numArtists,
     genre_count: numGenres,
@@ -198,6 +196,7 @@ exports.album_delete_post = asyncHandler(async (req, res, next) => {
   // Album has no instances or all instances have status other than "In Stock".
   // Delete the object and redirect to the list of albums.
   await Album.findByIdAndDelete(req.body.albumid);
+  await AlbumStock.deleteMany({ album: req.params.id });
   res.redirect("/catalog/albums");
 });
 
