@@ -18,7 +18,7 @@ block content
       each album in artist_albums
         dt
           a(href=album.url) #{album.title}
-          |  $#{album.price}
+          | $ #{album.price}
 
       else
         p This author has no albums.
