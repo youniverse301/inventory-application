@@ -19,14 +19,12 @@ block content
       input#numInStock.form-control(type='number' name='numInStock' value=(albumstock ? albumstock.numInStock : 0))
 
     div.form-group
-      label(for='status') Status:
+      label(for='status') Stock Status:
       select#status.form-control(name='status' required)
-        option(value='') --Please select a status--
-        each val in ['In Stock', 'Out of Stock', 'Backorder']
-          if albumstock && albumstock.status==val
-            option(value=val selected)= val
-          else
-            option(value=val)= val
+        option(value='') --Select Stock Status--
+        option(value='In Stock', selected=(albumstock && albumstock.status === 'In Stock')) In Stock
+        option(value='Out of Stock', selected=(albumstock && albumstock.status === 'Out of Stock')) Out of Stock
+        option(value='Backorder', selected=(albumstock && albumstock.status === 'Backorder')) Backorder
 
     button.btn.btn-primary(type='submit') Submit
 

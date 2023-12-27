@@ -21,18 +21,18 @@ exports.albumstock_detail = asyncHandler(async (req, res, next) => {
 
 // Display albumstock update form on GET.
 exports.albumstock_update_get = asyncHandler(async (req, res, next) => {
-    // Get the existing AlbumStock and Album data
-    const albumStock = await AlbumStock.findById(req.params.id).populate("album").exec();
-    const allAlbums = await Album.find({}, "title").sort({ title: 1 }).exec();
-  
-    res.render("albumstock_form", {
-      title: "Update an album's stock",
-      albumstock: albumStock,
-      album_list: allAlbums,
-    });
+  // Get the existing AlbumStock and Album data
+  const albumStock = await AlbumStock.findById(req.params.id).populate("album").exec();
+  const allAlbums = await Album.find({}, "title").sort({ title: 1 }).exec();
+  console.log(albumStock)
+
+  res.render("albumstock_form", {
+    title: "Update an album's stock",
+    albumstock: albumStock,
+    album_list: allAlbums,
+  });
 });
   
-
 // Handle albumstock update on POST.
 exports.albumstock_update_post = [
   // Validate and sanitize fields.
